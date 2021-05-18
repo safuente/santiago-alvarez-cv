@@ -1,12 +1,28 @@
-FROM python:3.8-alpine
+FROM python:3.7-alpine
 MAINTAINER Safuente
 
 # Avoid output buffer python in console
 ENV PYTHONBUFFERED 1
 
+# Dependencies for pillow
+RUN apk --update add \
+    build-base \
+    jpeg-dev \
+    zlib-dev
+
+# Add postgresql client to image
+RUN apk add --update --no-cache postgresql-client
+
+# Alias for deps installed, list of dependencies needed for db
+RUN apk add --update --no-cache --virtual .tmp-build-deps \
+    gcc libc-dev linux-headers postgresql-dev
+
 # Copy requirements to container
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
+
+# Remove temp deps
+RUN apk del .tmp-build-deps
 
 RUN mkdir /app
 WORKDIR /app
