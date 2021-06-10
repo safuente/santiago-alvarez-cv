@@ -37,3 +37,15 @@ test:
 lint:
 	docker-compose run --rm app flake8
 
+# Force build of docker on prod
+build-prod:
+	$(DOCKER_COMPOSE) -f docker-compose-prod.yml build
+
+# Force build of docker on prod
+up-prod:
+	$(DOCKER_COMPOSE) -f docker-compose-prod.yml up
+
+# Stop containers prod
+stop:
+	$(DOCKER_COMPOSE) -f docker-compose-prod.yml stop
+
