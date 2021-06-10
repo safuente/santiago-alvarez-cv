@@ -18,6 +18,8 @@ services:
       - ENV=prod
     depends_on:
       - db
+    expose:
+      - 8000
 
   db:
     image: postgres:10-alpine
