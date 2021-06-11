@@ -39,7 +39,7 @@ services:
       - ./app/static:/app/static
       - ./app/media:/app/media
     ports:
-      - 8008:80
+      - "0.0.0.0:80:80"
     depends_on:
       - app
 
