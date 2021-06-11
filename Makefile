@@ -45,6 +45,10 @@ build-prod:
 up-prod:
 	$(DOCKER_COMPOSE) -f docker-compose-prod.yml up
 
+# Force build of docker on prod detached
+up-prod-det:
+	$(DOCKER_COMPOSE) -f docker-compose-prod.yml up -d
+
 # Stop containers prod
 stop:
 	$(DOCKER_COMPOSE) -f docker-compose-prod.yml stop
